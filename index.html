@@ -1,13 +1,87 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="./src/main.js"></script>
+    <link rel="stylesheet" href="./src/style.css" />
     <title>Vite App</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
+    <header>
+      <h1>SubTracker</h1>
+    </header>
+    <main>
+      <section aria-labelledby="Add Subscription Section">
+        <h2>Subscriptions</h2>
+        <!-- Trigger/Open The Modal -->
+        <button type="button" id="myBtn">Add Subscription</button>
+      </section>
+      <h3>Total amount per month: $0</h3>
+
+      <!-- The Modal -->
+      <section class="modal" aria-labelledby="Modal pop up">
+        <!-- Modal content -->
+        <form class="modal-content" aria-labelledby="Subscription Form">
+          <span class="close">&times;</span>
+          <h3 id="form-heading">Add Your Subscription</h3>
+
+          <section id="input-container">
+            <label>
+              Name
+              <input type="text" name="subName" id="sub-name" required />
+            </label>
+
+            <label>
+              Price
+              <input
+                type="number"
+                name="subPrice"
+                id="sub-price"
+                min="0"
+                required
+              />
+            </label>
+
+            <label>
+              Category:
+              <select name="category" id="category" required>
+                <option selected disabled value="">Select a category</option>
+                <option value="Entertainement">Entertainement</option>
+                <option value="Productivity">Productivity</option>
+                <option value="Food">Food</option>
+                <option value="Fitness">Fitness</option>
+                <option value="Personal Care">Personal Care</option>
+                <option value="Education">Education</option>
+                <option value="Software">Software</option>
+              </select>
+            </label>
+
+            <label>
+              Comments
+              <input type="text" name="comments" id="comments" />
+            </label>
+            <button>Add</button>
+          </section>
+        </form>
+      </section>
+
+      <!-- Subscription Section -->
+      <ul
+        id="subscription-container"
+        aria-labelledby="Subscription Section"
+      ></ul>
+    </main>
   </body>
 </html>
+
+<!-- - MAIN:
+    - flex space-between: H2 ‘Subscriptions’  & button ‘Add Subscription’
+    - H3 Total amount of money per month
+        - Button opens up a form to add subscription
+        - FORM:
+            - Company Name, text input
+            - Price per month, number input
+            - Category, radio buttons (entertainment, productive)
+            - Submit button appending info to page
+    - Cards with subscriptions, can also have a delete button -->
