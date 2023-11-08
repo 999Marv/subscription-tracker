@@ -24,6 +24,40 @@ window.onclick = function (event) {
   }
 };
 
+//subscription display
+const subList = document.querySelector('#subscription-container');
+
+//display subscription function
+const displaySub = (name, price, cat, comm) => {
+  const li = document.createElement('li');
+  // li.className = 'movie-card';
+  li.ariaLabel = 'Subscription information';
+  li.tabIndex = '0';
+
+  const subName = document.createElement('h4');
+  const subPrice = document.createElement('p');
+  const category = document.createElement('p');
+  const comments = document.createElement('p');
+  const deleteBtn = document.createElement('span');
+
+  deleteBtn.textContent = `x`;
+  deleteBtn.classList.add('close');
+
+  subName.textContent = name;
+  subPrice.textContent = `Price per Month: $${Number(price).toLocaleString()}`;
+  category.textContent = `Audience Score: ${cat}%`;
+  comments.textContent = comm;
+  comments.style.fontStyle = 'italic';
+
+  li.append(deleteBtn, subName, subPrice, category, comments);
+  subList.prepend(li);
+
+  //delete li
+  deleteBtn.addEventListener('click', () => {
+    li.remove();
+  });
+};
+
 //form
 const form = document.querySelector('.modal-content');
 
@@ -35,13 +69,10 @@ const subscriptionHandler = (e) => {
   const { subName, subPrice, category, comments } =
     Object.fromEntries(formData);
 
-  console.log(subName, subPrice, category, comments);
+  displaySub(subName, subPrice, category, comments);
 
   form.reset();
   modal.style.display = 'none';
 };
 
 form.addEventListener('submit', subscriptionHandler);
-
-//subscription display
-const subList = document.querySelector('#subscription-container');
