@@ -1,3 +1,20 @@
+//form
+const form = document.querySelector('.modal-content');
+
+//local storage functions
+const setLocalStorageKey = (key, value) => {
+  localStorage.setItem(key, JSON.stringify(value));
+};
+
+const getLocalStorageValue = (key) => {
+  try {
+    return JSON.parse(localStorage.getItem(key));
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
 // Get the modal
 var modal = document.querySelector('.modal');
 
@@ -15,17 +32,23 @@ btn.onclick = function () {
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {
   modal.style.display = 'none';
+  form.reset();
 };
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = 'none';
+    form.reset();
   }
 };
 
 //subscription display
 const subList = document.querySelector('#subscription-container');
+
+//total price
+const total = document.querySelector('.total');
+let totalPrice = 0;
 
 //display subscription function
 const displaySub = (name, price, cat, comm) => {
@@ -43,26 +66,34 @@ const displaySub = (name, price, cat, comm) => {
   deleteBtn.textContent = `x`;
   deleteBtn.classList.add('close');
 
-  comm === ''
-    ? (comments.textContent = 'No comments')
-    : (comments.textContent = comm);
+  if (comm === '') {
+    comments.textContent = 'No comments';
+    comments.classList.add('no-comm');
+  } else {
+    comments.textContent = comm;
+  }
 
   subName.textContent = name;
   subPrice.textContent = `Price per Month: $${Number(price).toLocaleString()}`;
   category.textContent = `Category: ${cat}`;
   comments.style.fontStyle = 'italic';
+  comments.classList.add('comm');
 
   li.append(deleteBtn, subName, subPrice, category, comments);
-  subList.prepend(li);
+
+  subList.append(li);
 
   //delete li
   deleteBtn.addEventListener('click', () => {
     li.remove();
+    localStorage.removeItem(name);
+    totalPrice -= price;
+    total.textContent = `Total monthly cost: $${totalPrice}`;
   });
-};
 
-//form
-const form = document.querySelector('.modal-content');
+  totalPrice += +price;
+  total.textContent = `Total monthly cost: $${totalPrice}`;
+};
 
 //submit subscription handler
 const subscriptionHandler = (e) => {
@@ -76,6 +107,23 @@ const subscriptionHandler = (e) => {
 
   form.reset();
   modal.style.display = 'none';
+
+  //save to local storage
+  setLocalStorageKey(subName, { subName, subPrice, category, comments });
 };
 
 form.addEventListener('submit', subscriptionHandler);
+
+const displayLocal = () => {
+  Object.keys(localStorage).forEach((key) => {
+    const { subName, subPrice, category, comments } = getLocalStorageValue(key);
+
+    displaySub(subName, subPrice, category, comments);
+  });
+};
+
+const main = () => {
+  displayLocal();
+};
+
+main();

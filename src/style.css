@@ -19,7 +19,7 @@ main {
 }
 
 main h3 {
-  padding-top: ;
+  padding-top: 1.5rem;
 }
 
 /* The Modal (background) */
@@ -87,4 +87,16 @@ main h3 {
   list-style: none;
   padding: 1.5rem;
   width: 15rem;
+}
+
+.subscription p {
+  padding-top: 0.8rem;
+}
+
+.no-comm {
+  color: #aaa;
+}
+
+.comm {
+  font-size: 0.85rem;
 }
