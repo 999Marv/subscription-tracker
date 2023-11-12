@@ -3,21 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cabin&family=Work+Sans:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <script type="module" src="./src/main.js"></script>
     <link rel="stylesheet" href="./src/style.css" />
-    <title>Vite App</title>
+    <title>Subscription Tracker</title>
   </head>
   <body>
     <header>
       <h1>SubTracker</h1>
+      <section>
+        <ul>
+          <p class="sub-tab">Subscriptions</p>
+          <p class="chart-tab">Charts</p>
+        </ul>
+      </section>
     </header>
     <main>
       <section id="add-sub-section" aria-labelledby="Add Subscription Section">
-        <h2>Subscriptions</h2>
+        <h3 class="total">Total amount per month: $0</h3>
         <!-- Trigger/Open The Modal -->
-        <button type="button" id="myBtn">Add Subscription</button>
+        <button type="button" class="myBtn">+ Add Subscription</button>
       </section>
-      <h3 class="total">Total amount per month: $0</h3>
 
       <!-- The Modal -->
       <section class="modal" aria-labelledby="Modal pop up">
@@ -28,12 +37,12 @@
 
           <section id="input-container">
             <label>
-              Name
+              Name:
               <input type="text" name="subName" id="sub-name" required />
             </label>
 
             <label>
-              Price
+              Price:
               <input
                 type="number"
                 name="subPrice"
@@ -51,6 +60,7 @@
                 <option value="Productivity">Productivity</option>
                 <option value="Food">Food</option>
                 <option value="Fitness">Fitness</option>
+                <option value="Travel">Travel</option>
                 <option value="Personal Care">Personal Care</option>
                 <option value="Education">Education</option>
                 <option value="Software">Software</option>
@@ -58,10 +68,10 @@
             </label>
 
             <label>
-              Comments
+              Comments:
               <input type="text" name="comments" id="comments" />
             </label>
-            <button>Add</button>
+            <button class="myBtn">Add</button>
           </section>
         </form>
       </section>

@@ -19,7 +19,7 @@ const getLocalStorageValue = (key) => {
 var modal = document.querySelector('.modal');
 
 // Get the button that opens the modal
-var btn = document.querySelector('#myBtn');
+var btn = document.querySelector('.myBtn');
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName('close')[0];
