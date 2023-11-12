@@ -30,7 +30,7 @@ const subList = document.querySelector('#subscription-container');
 //display subscription function
 const displaySub = (name, price, cat, comm) => {
   const li = document.createElement('li');
-  // li.className = 'movie-card';
+  li.className = 'subscription';
   li.ariaLabel = 'Subscription information';
   li.tabIndex = '0';
 
@@ -43,10 +43,13 @@ const displaySub = (name, price, cat, comm) => {
   deleteBtn.textContent = `x`;
   deleteBtn.classList.add('close');
 
+  comm === ''
+    ? (comments.textContent = 'No comments')
+    : (comments.textContent = comm);
+
   subName.textContent = name;
   subPrice.textContent = `Price per Month: $${Number(price).toLocaleString()}`;
-  category.textContent = `Audience Score: ${cat}%`;
-  comments.textContent = comm;
+  category.textContent = `Category: ${cat}`;
   comments.style.fontStyle = 'italic';
 
   li.append(deleteBtn, subName, subPrice, category, comments);
